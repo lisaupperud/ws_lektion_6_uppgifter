@@ -2,6 +2,7 @@ package com.lisa.lektion_6_uppgifter.controller;
 
 import com.lisa.lektion_6_uppgifter.model.CustomUser;
 import com.lisa.lektion_6_uppgifter.repository.CustomUserRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class CustomUserController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<CustomUser> addUser(@RequestBody CustomUser customUser) {
+    public ResponseEntity<CustomUser> addUser(@Valid @RequestBody CustomUser customUser) {
 
         // if the user already exists
         if (customUserRepository.findByUsername(customUser.getUsername()).isPresent()) {
@@ -41,7 +42,7 @@ public class CustomUserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CustomUser> updateUser(@PathVariable Long id, @RequestBody CustomUser customUser) {
+    public ResponseEntity<CustomUser> updateUser(@PathVariable Long id, @Valid @RequestBody CustomUser customUser) {
 
         Optional<CustomUser> foundUser = customUserRepository.findById(id);
 

@@ -1,6 +1,7 @@
 package com.lisa.lektion_6_uppgifter.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Users")
@@ -10,9 +11,11 @@ public class CustomUser {
     private Long id;
 
     @Column(nullable = false, unique = true)
+    @NotNull(message = "Username can not be null")
     private String username;
 
     @Column(nullable = false)
+    @NotNull(message = "Password can not be null")
     private String password;
 
     private boolean isEnabled;
